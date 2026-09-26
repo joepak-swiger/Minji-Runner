@@ -1,0 +1,38 @@
+MINJI RUNNER GOLD v0.7 - EXPO GO QUICKSTART
+=============================================
+
+Gold v0.7 is LANDSCAPE-FIRST on mobile.
+Hold the phone sideways while playing.
+
+1. Install Node.js 22.13+ on the Windows PC.
+2. Install Expo Go on your phone.
+3. Sign in to the same Expo account in Expo Go and in the Expo CLI if prompted.
+4. Put the phone and PC on the same Wi-Fi network.
+5. Double-click:
+
+   PLAY_MINJI_RUNNER_MOBILE.bat
+
+6. First launch only: npm will install the Expo dependencies, including
+   expo-screen-orientation.
+7. Scan the QR code shown by Expo with Expo Go.
+8. Minji Runner will request LANDSCAPE orientation automatically.
+9. Play using:
+
+   LEFT THUMB  = left/right movement pad
+   RIGHT THUMB = jump
+
+If a device temporarily refuses the orientation lock, the game will display
+"Turn your phone sideways" until the screen is landscape.
+
+The browser version still launches with:
+
+   PLAY_MINJI_RUNNER.bat
+
+IMPORTANT FOR FUTURE EDITS
+--------------------------
+The root browser game is the source of truth. After changing HTML/CSS/JS/assets,
+regenerate the Expo payload from the project root with:
+
+   npm run mobile:sync
+
+Do not manually edit expo-mobile/src/gameContent.js.

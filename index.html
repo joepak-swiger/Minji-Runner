@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#7ed8e9" />
+  <title>Minji Runner</title>
+
+  <link rel="preload" href="assets/background.png" as="image" />
+  <link rel="preload" href="assets/player/minji.png" as="image" />
+  <link rel="preload" href="assets/enemies/joe-goblin.gif" as="image" />
+  <link rel="preload" href="assets/powerups/food.png" as="image" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="game-root" aria-label="Minji Runner">
+    <section id="viewport" role="application" aria-label="Minji Runner game viewport">
+      <img id="background" src="assets/background.png" alt="" aria-hidden="true" />
+      <div id="atmosphere" aria-hidden="true"></div>
+
+      <div id="entities" aria-label="Game entities">
+        <div id="player" class="entity player" aria-label="Minji"></div>
+        <div id="effects" class="effects" aria-hidden="true"></div>
+      </div>
+
+      <div id="ground" aria-hidden="true"></div>
+    </section>
+
+    <header id="hud" aria-live="polite">
+      <div class="hud-brand">
+        <span class="hud-title">MINJI RUNNER</span>
+        <span class="stage-pill">Stage <strong id="stage-number">1</strong> · <span id="stage-name">Warm Up</span></span>
+      </div>
+      <div class="hud-stats">
+        <div id="powerup-hud" class="powerup-hud" hidden aria-label="Active food effects">
+          <div id="status-invulnerability" class="powerup-status status-invulnerability" hidden>
+            <span id="status-invulnerability-icon" class="powerup-hud-icon" aria-hidden="true"></span>
+            <span class="powerup-hud-copy">
+              <span id="status-invulnerability-name" class="powerup-hud-name">Invincible</span>
+              <strong id="status-invulnerability-time">0.0s</strong>
+            </span>
+          </div>
+
+          <div id="status-speed" class="powerup-status status-speed" hidden>
+            <span id="status-speed-icon" class="powerup-hud-icon" aria-hidden="true"></span>
+            <span class="powerup-hud-copy">
+              <span id="status-speed-name" class="powerup-hud-name">Coffee Rush</span>
+              <strong id="status-speed-time">0.0s</strong>
+            </span>
+          </div>
+
+          <div id="status-shield" class="powerup-status status-shield" hidden>
+            <span id="status-shield-icon" class="powerup-hud-icon" aria-hidden="true"></span>
+            <span class="powerup-hud-copy">
+              <span id="status-shield-name" class="powerup-hud-name">Shield</span>
+              <strong id="status-shield-time">1 HIT</strong>
+            </span>
+          </div>
+
+          <div id="status-slow" class="powerup-status status-slow" hidden>
+            <span id="status-slow-icon" class="powerup-hud-icon" aria-hidden="true"></span>
+            <span class="powerup-hud-copy">
+              <span id="status-slow-name" class="powerup-hud-name">Sluggish</span>
+              <strong id="status-slow-time">0.0s</strong>
+            </span>
+          </div>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-label">Time</span>
+          <strong id="timer-value">00:00.000</strong>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-label">Score</span>
+          <strong id="score">0</strong>
+        </div>
+        <div class="hud-stat desktop-best">
+          <span class="hud-label">Best</span>
+          <strong id="best-score">0</strong>
+        </div>
+        <button id="btn-audio" class="hud-button" type="button" aria-pressed="false">🔊</button>
+        <button id="btn-pause" class="hud-button" type="button">Pause</button>
+      </div>
+    </header>
+
+    <div id="overlay">
+      <section id="start-screen" class="panel visible" role="dialog" aria-modal="true" aria-labelledby="start-title">
+        <p class="eyebrow">GOLD v0.7 · LANDSCAPE MOBILE</p>
+        <h1 id="start-title">Minji Runner</h1>
+        <p class="lead">Run, jump, survive, grab snacks, and see how long Minji can dodge the increasingly ridiculous trouble coming from the right.</p>
+        <div class="controls-card" aria-label="Controls">
+          <span><kbd>A</kbd>/<kbd>←</kbd> Move left</span>
+          <span><kbd>D</kbd>/<kbd>→</kbd> Move right</span>
+          <span><kbd>Space</kbd>/<kbd>W</kbd>/<kbd>↑</kbd> Jump</span>
+          <span><kbd>S</kbd>/<kbd>↓</kbd> Fast fall</span>
+          <span><kbd>Esc</kbd>/<kbd>P</kbd> Pause</span>
+          <span><span class="mini-food-demo" aria-hidden="true"></span> Fruit = invincibility</span>
+          <span class="mobile-controls-tip">📱 Mobile landscape: left thumb moves · right thumb jumps</span>
+          <span>🥕 Healthy food = one-hit shield</span>
+          <span>☕ Coffee = speed boost</span>
+          <span>🍔 Junk food / beer = slowdown</span>
+        </div>
+        <button id="btn-start" class="primary-button" type="button">Start Run</button>
+        <p class="panel-note">v0.7 keeps the full game and makes Expo Go landscape-first. Hold the phone sideways: left thumb moves, right thumb jumps, and the wider view gives you more time to react.</p>
+      </section>
+
+      <section id="pause-screen" class="panel" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+        <p class="eyebrow">RUN ON HOLD</p>
+        <h2 id="pause-title">Paused</h2>
+        <p class="lead small">Your time, spawn clocks, active food-effect timers, shield, and music are frozen.</p>
+        <div class="button-row">
+          <button id="btn-resume" class="primary-button" type="button">Resume</button>
+          <button id="btn-restart" class="secondary-button" type="button">Restart</button>
+        </div>
+      </section>
+
+      <section id="gameover-screen" class="panel" role="dialog" aria-modal="true" aria-labelledby="gameover-title">
+        <p class="eyebrow">BONK.</p>
+        <h2 id="gameover-title">Game Over</h2>
+        <div class="results-grid">
+          <div><span>Time</span><strong id="final-time">00:00.000</strong></div>
+          <div><span>Score</span><strong id="final-score">0</strong></div>
+          <div><span>Stage</span><strong id="final-stage">1 · Warm Up</strong></div>
+          <div><span>Best Score</span><strong id="final-best">0</strong></div>
+        </div>
+        <button id="btn-retry" class="primary-button" type="button">Run It Back</button>
+      </section>
+    </div>
+
+    <aside id="rotate-device-prompt" aria-live="polite" aria-label="Rotate device">
+      <div class="rotate-phone-icon" aria-hidden="true">📱</div>
+      <strong>Turn your phone sideways</strong>
+      <span>Minji Runner is designed for landscape play on mobile.</span>
+    </aside>
+
+    <nav id="touch-controls" aria-label="Touch controls">
+      <div class="touch-move-pad" aria-label="Movement controls">
+        <button id="btn-left" class="touch-button move left" type="button" aria-label="Move left">◀</button>
+        <button id="btn-right" class="touch-button move right" type="button" aria-label="Move right">▶</button>
+      </div>
+      <button id="btn-jump" class="touch-button jump" type="button" aria-label="Jump">
+        <span class="jump-arrow" aria-hidden="true">↑</span>
+        <span class="jump-label">JUMP</span>
+      </button>
+    </nav>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

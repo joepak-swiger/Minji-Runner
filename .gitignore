@@ -1,0 +1,7 @@
+
+.DS_Store
+.expo/
+.vscode/
+Thumbs.db
+dist/
+node_modules/

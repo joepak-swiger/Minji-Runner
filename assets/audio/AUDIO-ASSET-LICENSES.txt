@@ -1,0 +1,42 @@
+MINJI RUNNER - AUDIO ASSET LICENSES
+===================================
+
+BACKGROUND MUSIC
+----------------
+Asset: Jump and Run (8-bit)
+Creator: bart
+Original file: random silly chip song.ogg
+Original preserved file: background-chiptune.ogg
+Gold v0.6 runtime transcode: background-chiptune.mp3
+Source: https://opengameart.org/content/jump-and-run-8-bit
+License: Creative Commons Attribution 3.0 (CC BY 3.0)
+License: https://creativecommons.org/licenses/by/3.0/
+Attribution note on OpenGameArt: link back to OpenGameArt in the credits.
+
+INVINCIBILITY MUSIC
+-------------------
+Asset: Invincible!
+Creator: NBJDLukasAbsolute
+Original preserved file: invincible.wav
+Gold v0.6 runtime transcode: invincible.mp3
+Source: https://opengameart.org/content/invincible
+License: CC0
+
+JUMP SOUND EFFECT
+-----------------
+Asset: Cartoony Jump and Bounce
+Original work: YoFrankie! (c) 2008 Blender Foundation
+Submitted on OpenGameArt by: qubodup
+Original file: apricotjumpbounce-sheepbounce2.ogg
+Original preserved file: minji-jump.ogg
+Gold v0.6 runtime transcode: minji-jump.wav
+Source: https://opengameart.org/content/cartoony-jump-and-bounce
+License: Creative Commons Attribution 3.0 (CC BY 3.0)
+License: https://creativecommons.org/licenses/by/3.0/
+
+This local notice supplements the project's CREDITS.md so the attribution stays with the audio files if they are copied elsewhere.
+
+TRANSCODING NOTE
+----------------
+Gold v0.6 adds MP3/WAV playback copies for broader mobile WebView compatibility.
+No new rights are claimed in these transcoded copies; the source licenses above still apply.

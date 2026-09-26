@@ -1,0 +1,7 @@
+Food icon sprite sheet
+Source: https://opengameart.org/content/icons-food
+Creator listed on OpenGameArt: thekingphoenix
+License: CC0 1.0 Universal (public-domain dedication)
+
+The game uses the original 160x160 sprite sheet as a 5x5 grid of 32x32 icons.
+Attribution is not required by CC0, but this note is kept so the asset's origin and license remain documented with the project.

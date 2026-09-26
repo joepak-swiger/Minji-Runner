@@ -1,0 +1,13 @@
+{
+  "name": "minji-runner-gold",
+  "private": true,
+  "version": "0.7.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test:smoke": "node tools/smoke-test.mjs",
+    "test:mobile": "node tools/mobile-smoke-test.mjs",
+    "mobile:sync": "node expo-mobile/tools/build-game-content.mjs"
+  }
+}
